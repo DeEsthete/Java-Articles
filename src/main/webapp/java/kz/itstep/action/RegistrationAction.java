@@ -2,6 +2,7 @@ package kz.itstep.action;
 
 import kz.itstep.dao.UserDao;
 import kz.itstep.entity.User;
+import kz.itstep.helper.PasswordHelper;
 
 import javax.management.OperationsException;
 import javax.servlet.ServletException;
@@ -48,12 +49,13 @@ public class RegistrationAction implements Action {
 
         User user = new User();
         user.setLogin(request.getParameter("login"));
-        user.setPassword(request.getParameter("password"));
+        user.setPassword(PasswordHelper.getHash(request.getParameter("password")));
         user.setFirstName(request.getParameter("firstName"));
         user.setSecondName(request.getParameter("secondName"));
+        user.setRoleId(1);
 
-         if (!userDao.insert(user)) {
-             throw new OperationsException("An error occured");
-         }
+        if (!userDao.insert(user)) {
+            throw new OperationsException("An error occured");
+        }
     }
 }

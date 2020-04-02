@@ -18,14 +18,13 @@ public class UserDao extends AbstractDao<User> {
             "UPDATE" + TABLE_NAME + " set login=?, password=?, first_name=?, second_name=?, role_id=?, token=? where id=?";
     private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM " + TABLE_NAME + " where id=?";
     private static final String SQL_SELECT_USER_BY_TOKEN = "SELECT * FROM " + TABLE_NAME + " where token=?";
-    private static final String SQL_SELECT_USER_BY_LOGIN_PASSWORD = "SELECT * FROM " + TABLE_NAME + " where login=? and password=?";
+    private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT * FROM " + TABLE_NAME + " where login=?";
 
-    public User findByLoginPassword(String login, String password) {
+    public User findByLogin(String login) {
         User user = null;
         Connection connection = ConnectionPool.getConnectionPool().getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN_PASSWORD)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN)) {
             preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     user = setUserFields(resultSet);

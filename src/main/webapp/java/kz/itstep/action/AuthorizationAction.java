@@ -3,9 +3,9 @@ package kz.itstep.action;
 import kz.itstep.dao.UserDao;
 import kz.itstep.entity.User;
 import kz.itstep.helper.CookieHelper;
+import kz.itstep.helper.PasswordHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,11 +22,18 @@ public class AuthorizationAction implements Action {
             request.getRequestDispatcher(URL_AUTHORIZATION_PAGE).forward(request, response);
         } else if (request.getMethod().equals("POST")) {
             UserDao userDao = new UserDao();
-            User user = userDao.findByLoginPassword(request.getParameter("login"), request.getParameter("password"));
+            User user = userDao.findByLogin(request.getParameter("login"));
             if (user == null) {
                 request.setAttribute(LOGIN_ERROR, true);
                 request.getRequestDispatcher(URL_AUTHORIZATION_PAGE).forward(request, response);
             } else {
+                boolean passwordIsOk;
+                passwordIsOk = PasswordHelper.getHash(request.getParameter("password")).equals(user.getPassword());
+                if (!passwordIsOk) {
+                    request.setAttribute(LOGIN_ERROR, true);
+                    request.getRequestDispatcher(URL_AUTHORIZATION_PAGE).forward(request, response);
+                }
+
                 //Cookie user token
                 UUID uuid = UUID.randomUUID();
                 String randomUUIDString = uuid.toString();
