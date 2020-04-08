@@ -5,12 +5,6 @@ import org.apache.log4j.Logger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.SecureRandom;
 
 public class PasswordHelper {
     private static final Logger logger = Logger.getLogger(RoleFilter.class);

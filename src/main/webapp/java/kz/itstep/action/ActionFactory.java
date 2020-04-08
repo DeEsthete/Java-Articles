@@ -30,8 +30,11 @@ public class ActionFactory {
         PAGES.put("GET/articles", new ArticlesAction());
         PAGES.put("GET/article", new ArticleAction());
         PAGES.put("POST/delete/article", new DeleteArticleAction());
+        PAGES.put("GET/edit/article", new UpdateArticleAction());
+        PAGES.put("POST/edit/article", new UpdateArticleAction());
         PAGES.put("GET/add-article", new DefaultAction(URL_ADD_ARTICLE_PAGE));
         PAGES.put("POST/add-article", new AddArticleAction());
+        PAGES.put("GET/article-like", new ArticleRateAction());
         PAGES.put("GET/set-language", new ChangeLanguageAction());
         PAGES.put("GET/logout", new LogoutAction());
     }

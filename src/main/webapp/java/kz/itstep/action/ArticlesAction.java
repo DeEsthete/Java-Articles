@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static kz.itstep.util.AppConstants.URL_ARTICLES_PAGE;
 
@@ -21,6 +22,7 @@ public class ArticlesAction implements Action {
                 a.setBody(a.getBody().substring(0, 500));
             }
         });
+
         request.setAttribute("list", articles);
         request.getRequestDispatcher(URL_ARTICLES_PAGE).forward(request, response);
     }

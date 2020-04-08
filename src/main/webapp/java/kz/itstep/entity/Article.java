@@ -5,7 +5,7 @@ public class Article extends Entity {
     private String title;
     private String body;
 
-    public int getUser_id() {
+    public int getUserId() {
         return user_id;
     }
 

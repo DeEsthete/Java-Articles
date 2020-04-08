@@ -10,15 +10,35 @@
 <div class="text-center">
   <div class="card">
     <div class="card-header">
-      <h2>${article.title}</h2>
+      <h2>${article.getTitle()}</h2>
     </div>
     <div class="card-body">
-      ${article.body}
-      <form method="post" action="/fs/delete/article" class="w-100 text-right">
-        <input type="hidden" name="articleId" value="${article.id}">
-        <button class="btn btn-warning" type="submit">${edit}</button>
-        <button class="btn btn-danger" type="submit">${delete}</button>
-      </form>
+      ${article.getBody()}
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <div class="d-inline-block" style="color: green;">
+              <a href="/fs/article-like?articleId=${article.id}&isLike=true" style="font-size: 24px; color: green;">
+                <i class="fas fa-thumbs-up"></i>
+              </a>
+              ${article.getLikesCount()}
+            </div>
+            <div class="d-inline-block" style="color: red;">
+              <a href="/fs/article-like?articleId=${article.id}&isLike=false" style="font-size: 24px; color: red;">
+                <i class="fas fa-thumbs-down"></i>
+              </a>
+              ${article.getDislikesCount()}
+            </div>
+          </div>
+          <div class="col-6 text-right">
+            <form method="post" action="/fs/delete/article" class="">
+              <input type="hidden" name="articleId" value="${article.id}">
+              <button class="btn btn-warning" type="submit">${edit}</button>
+              <button class="btn btn-danger" type="submit">${delete}</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

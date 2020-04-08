@@ -17,6 +17,7 @@ public final class AppConstants {
     public static final String URL_ARTICLES_PAGE = BASE_URL + "articles.jsp";
     public static final String URL_ARTICLE_PAGE = BASE_URL + "article.jsp";
     public static final String URL_ADD_ARTICLE_PAGE = BASE_URL + "add_article.jsp";
+    public static final String URL_UPDATE_ARTICLE_PAGE = BASE_URL + "update_article.jsp";
 
     public static final String LOGIN_ERROR = "login_error";
 
