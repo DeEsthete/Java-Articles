@@ -19,7 +19,15 @@ public class UpdateArticleAction implements Action {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getMethod().equals("GET")) {
+            int articleId = -1;
+            String articleIdParameter = (String) request.getParameter("articleId");
+            if (articleIdParameter != null && !articleIdParameter.isEmpty()) {
+                articleId = Integer.parseInt((String) request.getParameter("articleId"));
+            }
+
+            request.setAttribute("articleId", articleId);
             request.getRequestDispatcher(URL_UPDATE_ARTICLE_PAGE).forward(request, response);
+
         } else if (request.getMethod().equals("POST")) {
             ArticleDao articleDao = new ArticleDao();
             int articleId = Integer.parseInt(request.getParameter("articleId"));

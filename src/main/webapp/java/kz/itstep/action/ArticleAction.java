@@ -5,6 +5,8 @@ import kz.itstep.dao.ArticleRateDao;
 import kz.itstep.dao.UserDao;
 import kz.itstep.entity.Article;
 import kz.itstep.entity.ArticleRate;
+import kz.itstep.entity.User;
+import kz.itstep.helper.CookieHelper;
 import kz.itstep.model.ArticleViewModel;
 
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static kz.itstep.util.AppConstants.ATTR_USER_TOKEN;
 import static kz.itstep.util.AppConstants.URL_ARTICLE_PAGE;
 
 public class ArticleAction implements Action {
@@ -38,6 +41,8 @@ public class ArticleAction implements Action {
         model.setUsersLike(likes.stream().map(r -> userDao.findById(r.getUserId())).collect(Collectors.toList()));
         model.setUsersDislike(dislikes.stream().map(r -> userDao.findById(r.getUserId())).collect(Collectors.toList()));
 
+        User user = userDao.findByToken(CookieHelper.getCookie(request, ATTR_USER_TOKEN));
+        request.setAttribute("isMyArticle", model.getUserId() == user.getId());
         request.setAttribute("article", model);
 
         request.getRequestDispatcher(URL_ARTICLE_PAGE).forward(request, response);

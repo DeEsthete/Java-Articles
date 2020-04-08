@@ -22,7 +22,7 @@ public class ArticleViewModel {
         this.id = id;
     }
 
-    public int getUser_id() {
+    public int getUserId() {
         return user_id;
     }
 

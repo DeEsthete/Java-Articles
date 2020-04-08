@@ -21,7 +21,7 @@ public class ArticleDao extends AbstractDao<Article> {
             preparedStatement.setInt(1, entity.getUserId());
             preparedStatement.setString(2, entity.getTitle());
             preparedStatement.setString(3, entity.getBody());
-            preparedStatement.setInt(5, entity.getId());
+            preparedStatement.setInt(4, entity.getId());
             preparedStatement.executeUpdate();
             updated = true;
         } catch (SQLException e) {

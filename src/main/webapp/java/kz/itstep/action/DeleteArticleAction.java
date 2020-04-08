@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static kz.itstep.util.AppConstants.ATTR_USER_TOKEN;
+import static kz.itstep.util.AppConstants.URL_UPDATE_ARTICLE_PAGE;
 
 public class DeleteArticleAction implements Action {
     @Override
@@ -28,12 +29,7 @@ public class DeleteArticleAction implements Action {
         User user = userDao.findByToken(CookieHelper.getCookie(request, ATTR_USER_TOKEN));
         Article article = articleDao.findById(articleId);
         if (user != null && article != null && article.getUserId() == user.getId()) {
-            if (articleId == -1) {
-                articleDao.delete(articleId);
-            } else {
-                response.sendRedirect("/fs/edit/article?articleId=" + articleId);
-                return;
-            }
+            articleDao.delete(articleId);
             response.sendRedirect("/fs/articles");
             return;
         }
