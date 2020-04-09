@@ -2,12 +2,14 @@ package kz.itstep.action;
 
 import kz.itstep.dao.ArticleDao;
 import kz.itstep.dao.ArticleRateDao;
+import kz.itstep.dao.CommentaryDao;
 import kz.itstep.dao.UserDao;
 import kz.itstep.entity.Article;
 import kz.itstep.entity.ArticleRate;
 import kz.itstep.entity.User;
 import kz.itstep.helper.CookieHelper;
 import kz.itstep.model.ArticleViewModel;
+import kz.itstep.model.CommentaryViewModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,14 +27,16 @@ public class ArticleAction implements Action {
         ArticleDao articleDao = new ArticleDao();
         ArticleRateDao rateDao = new ArticleRateDao();
         UserDao userDao = new UserDao();
+        CommentaryDao commentaryDao = new CommentaryDao();
         int articleId = Integer.parseInt((String) request.getParameter("articleId"));
 
         Article article = articleDao.findById(articleId);
         ArticleViewModel model = new ArticleViewModel();
         model.setId(article.getId());
-        model.setUser_id(article.getUserId());
+        model.setUserId(article.getUserId());
         model.setTitle(article.getTitle());
         model.setBody(article.getBody());
+        model.setCommentaryListId(article.getCommentaryListId());
 
         List<ArticleRate> likes = rateDao.getArticleRates(articleId).stream().filter(r -> r.isLike()).collect(Collectors.toList());
         List<ArticleRate> dislikes = rateDao.getArticleRates(articleId).stream().filter(r -> !r.isLike()).collect(Collectors.toList());
@@ -40,6 +44,12 @@ public class ArticleAction implements Action {
         model.setDislikesCount(dislikes.size());
         model.setUsersLike(likes.stream().map(r -> userDao.findById(r.getUserId())).collect(Collectors.toList()));
         model.setUsersDislike(dislikes.stream().map(r -> userDao.findById(r.getUserId())).collect(Collectors.toList()));
+        model.setCommentaries(
+                commentaryDao.findAllByCommentaryList(article.getCommentaryListId())
+                        .stream()
+                        .map(c -> new CommentaryViewModel(c, userDao.findById(c.getUserId()).getLogin()))
+                        .collect(Collectors.toList())
+        );
 
         User user = userDao.findByToken(CookieHelper.getCookie(request, ATTR_USER_TOKEN));
         request.setAttribute("isMyArticle", model.getUserId() == user.getId());

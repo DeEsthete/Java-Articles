@@ -28,6 +28,6 @@ public class ArticleRateAction implements Action {
         if (!rateDao.isExist(rate)) {
             rateDao.insert(rate);
         }
-        response.sendRedirect("/fs/articles");
+        response.sendRedirect("/fs/article?articleId=" + request.getParameter("articleId"));
     }
 }

@@ -6,13 +6,15 @@ import java.util.List;
 
 public class ArticleViewModel {
     private int id;
-    private int user_id;
+    private int userId;
     private String title;
     private String body;
+    private int commentaryListId;
     private int likesCount;
     private int dislikesCount;
     private List<User> usersLike;
     private List<User> usersDislike;
+    private List<CommentaryViewModel> commentaries;
 
     public int getId() {
         return id;
@@ -23,11 +25,11 @@ public class ArticleViewModel {
     }
 
     public int getUserId() {
-        return user_id;
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -44,6 +46,14 @@ public class ArticleViewModel {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public int getCommentaryListId() {
+        return commentaryListId;
+    }
+
+    public void setCommentaryListId(int commentaryListId) {
+        this.commentaryListId = commentaryListId;
     }
 
     public int getLikesCount() {
@@ -76,5 +86,13 @@ public class ArticleViewModel {
 
     public void setUsersDislike(List<User> usersDislike) {
         this.usersDislike = usersDislike;
+    }
+
+    public List<CommentaryViewModel> getCommentaries() {
+        return commentaries;
+    }
+
+    public void setCommentaries(List<CommentaryViewModel> commentaries) {
+        this.commentaries = commentaries;
     }
 }

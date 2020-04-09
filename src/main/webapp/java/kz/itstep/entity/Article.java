@@ -4,12 +4,13 @@ public class Article extends Entity {
     private int user_id;
     private String title;
     private String body;
+    private int commentaryListId;
 
     public int getUserId() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUserId(int user_id) {
         this.user_id = user_id;
     }
 
@@ -27,5 +28,13 @@ public class Article extends Entity {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public int getCommentaryListId() {
+        return commentaryListId;
+    }
+
+    public void setCommentaryListId(int commentaryListId) {
+        this.commentaryListId = commentaryListId;
     }
 }

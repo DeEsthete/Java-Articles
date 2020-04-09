@@ -13,8 +13,12 @@
       <h2>${article.getTitle()}</h2>
     </div>
     <div class="card-body">
-      ${article.getBody()}
       <div class="container">
+        <div class="row">
+          <div class="col-12">
+            ${article.getBody()}
+          </div>
+        </div>
         <div class="row">
           <div class="col-6 text-left">
             <c:if test="${!isMyArticle}">
@@ -43,6 +47,37 @@
                 <button class="btn btn-danger" type="submit">${delete}</button>
               </form>
             </c:if>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-left">
+            <hr>
+            Commentaries:
+          </div>
+          <div class="col-12">
+            <div class="w-100 mb-3">
+              <form method="post" action="/fs/add-commentary" class="input-group" target="none">
+                <input type="hidden" name="listId" value="${article.getCommentaryListId()}">
+                <input type="text" name="content" class="form-control" placeholder="Recipient's username"
+                       aria-label="Commentary content" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit" onclick="setTimeout(location.reload(), 1000);">Write</button>
+                </div>
+              </form>
+            </div>
+            <hr>
+          </div>
+          <div class="col-12">
+            <c:forEach items="${article.getCommentaries()}" var="commentary">
+              <div class="card w-100">
+                <div class="card-header">
+                  ${commentary.getUserNickname()}
+                </div>
+                <div class="card-body">
+                  <p class="card-text">${commentary.getContent()}</p>
+                </div>
+              </div>
+            </c:forEach>
           </div>
         </div>
       </div>

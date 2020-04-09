@@ -35,6 +35,7 @@ public class ActionFactory {
         PAGES.put("GET/add-article", new DefaultAction(URL_ADD_ARTICLE_PAGE));
         PAGES.put("POST/add-article", new AddArticleAction());
         PAGES.put("GET/article-like", new ArticleRateAction());
+        PAGES.put("POST/add-commentary", new AddCommentaryAction());
         PAGES.put("GET/set-language", new ChangeLanguageAction());
         PAGES.put("GET/logout", new LogoutAction());
     }
