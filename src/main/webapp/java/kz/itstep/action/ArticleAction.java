@@ -1,15 +1,14 @@
 package kz.itstep.action;
 
-import kz.itstep.dao.ArticleDao;
-import kz.itstep.dao.ArticleRateDao;
-import kz.itstep.dao.CommentaryDao;
-import kz.itstep.dao.UserDao;
+import kz.itstep.dao.*;
 import kz.itstep.entity.Article;
 import kz.itstep.entity.ArticleRate;
+import kz.itstep.entity.ArticleTag;
 import kz.itstep.entity.User;
 import kz.itstep.helper.CookieHelper;
 import kz.itstep.model.ArticleViewModel;
 import kz.itstep.model.CommentaryViewModel;
+import kz.itstep.model.TagViewModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +27,8 @@ public class ArticleAction implements Action {
         ArticleRateDao rateDao = new ArticleRateDao();
         UserDao userDao = new UserDao();
         CommentaryDao commentaryDao = new CommentaryDao();
+        ArticleTagDao articleTagDao = new ArticleTagDao();
+        TagDao tagDao = new TagDao();
         int articleId = Integer.parseInt((String) request.getParameter("articleId"));
 
         Article article = articleDao.findById(articleId);
@@ -48,6 +49,15 @@ public class ArticleAction implements Action {
                 commentaryDao.findAllByCommentaryList(article.getCommentaryListId())
                         .stream()
                         .map(c -> new CommentaryViewModel(c, userDao.findById(c.getUserId()).getLogin()))
+                        .collect(Collectors.toList())
+        );
+        model.setTags(
+                articleTagDao.getArticleTags(articleId)
+                        .stream()
+                        .collect(Collectors.groupingBy(ArticleTag::getTagId))
+                        .values()
+                        .stream()
+                        .map(at -> new TagViewModel(at.stream().findFirst().get(), tagDao.findById(at.stream().findFirst().get().getTagId()), at.size()))
                         .collect(Collectors.toList())
         );
 

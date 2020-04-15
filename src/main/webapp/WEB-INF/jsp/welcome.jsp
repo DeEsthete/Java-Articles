@@ -11,7 +11,12 @@
 <%@include file='core/header.jsp'%>
 <div class="text-center">
   <h2>${title}</h2>
-  <a href="/fs/registration">${registration}</a>
-  <a href="/fs/authorization">${authorization}</a>
+  <c:if test="${empty user}">
+    <a href="/fs/registration">${registration}</a>
+    <a href="/fs/authorization">${authorization}</a>
+  </c:if>
+  <c:if test="${not empty user}">
+    <a href="/fs/articles">Articles</a>
+  </c:if>
 </div>
 <%@include file='core/footer.jsp'%>

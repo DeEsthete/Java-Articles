@@ -15,18 +15,18 @@
   </div>
   <div class="card-body">
     <form action="/fs/edit/article" method="post">
-      <input type="hidden" name="articleId" class="form-control" aria-label="Default" value="${articleId}">
+      <input type="hidden" name="articleId" class="form-control" aria-label="Default" value="${article.id}">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text">${articleTitle}</span>
         </div>
-        <input type="text" name="title" class="form-control" aria-label="Default">
+        <input type="text" name="title" value="${article.title}" class="form-control" aria-label="Default">
       </div>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">${articleBody}</span>
         </div>
-        <input type="text" name="body" class="form-control" aria-label="Default">
+        <textarea name="body" class="form-control" aria-label="With textarea">${article.body}</textarea>
       </div>
       <div>
         <button type="submit" class="btn btn-primary mt-1">${update}</button>

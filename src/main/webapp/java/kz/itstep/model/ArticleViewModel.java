@@ -15,9 +15,14 @@ public class ArticleViewModel {
     private List<User> usersLike;
     private List<User> usersDislike;
     private List<CommentaryViewModel> commentaries;
+    private List<TagViewModel> tags;
 
     public int getId() {
         return id;
+    }
+
+    public String getIdString() {
+        return String.valueOf(id);
     }
 
     public void setId(int id) {
@@ -94,5 +99,13 @@ public class ArticleViewModel {
 
     public void setCommentaries(List<CommentaryViewModel> commentaries) {
         this.commentaries = commentaries;
+    }
+
+    public List<TagViewModel> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<TagViewModel> tags) {
+        this.tags = tags;
     }
 }

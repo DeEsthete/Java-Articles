@@ -39,6 +39,7 @@ public class RoleDao extends AbstractDao<Role> {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdateRole)) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setInt(2, entity.getWeight());
+            preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
             updated = true;
         } catch (SQLException e) {

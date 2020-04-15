@@ -21,11 +21,11 @@
         </div>
         <input type="text" name="title" class="form-control" aria-label="Default">
       </div>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">${articleBody}</span>
         </div>
-        <input type="text" name="body" class="form-control" aria-label="Default">
+        <textarea name="body" class="form-control" aria-label="With textarea"></textarea>
       </div>
       <div>
         <button type="submit" class="btn btn-primary mt-1">${write}</button>

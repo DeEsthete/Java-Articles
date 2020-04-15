@@ -19,6 +19,24 @@
             ${article.getBody()}
           </div>
         </div>
+        <div class="row text-left">
+          <div class="col-12">
+            <h6>
+              <c:forEach var="item" items="${article.getTags()}">
+                <span class="badge badge-secondary">${item.getName()} ${item.getCount()}</span>
+              </c:forEach>
+            </h6>
+          </div>
+          <div class="col-12">
+            <form method="post" action="/fs/add-tag" class="d-inline-block mr-1">
+              <input type="hidden" name="articleId" value="${article.id}">
+              <div class="input-group">
+                <input type="text" name="tagName" class="form-control" aria-label="Default">
+                <button class="btn btn-light" type="submit">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
         <div class="row">
           <div class="col-6 text-left">
             <c:if test="${!isMyArticle}">
@@ -58,10 +76,12 @@
             <div class="w-100 mb-3">
               <form method="post" action="/fs/add-commentary" class="input-group" target="none">
                 <input type="hidden" name="listId" value="${article.getCommentaryListId()}">
-                <input type="text" name="content" class="form-control" placeholder="Recipient's username"
+                <input type="text" name="content" class="form-control" placeholder="Commentary content"
                        aria-label="Commentary content" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit" onclick="setTimeout(location.reload(), 1000);">Write</button>
+                  <button class="btn btn-outline-secondary" type="submit"
+                          onclick="setTimeout(location.reload(), 1000);">Write
+                  </button>
                 </div>
               </form>
             </div>
@@ -71,7 +91,7 @@
             <c:forEach items="${article.getCommentaries()}" var="commentary">
               <div class="card w-100">
                 <div class="card-header">
-                  ${commentary.getUserNickname()}
+                    ${commentary.getUserNickname()}
                 </div>
                 <div class="card-body">
                   <p class="card-text">${commentary.getContent()}</p>
