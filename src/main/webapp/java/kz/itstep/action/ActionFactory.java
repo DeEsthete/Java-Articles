@@ -39,6 +39,9 @@ public class ActionFactory {
         PAGES.put("POST/add-tag", new AddTagAction());
         PAGES.put("GET/set-language", new ChangeLanguageAction());
         PAGES.put("GET/logout", new LogoutAction());
+        PAGES.put("GET/user_profile", new UserProfileAction());
+        PAGES.put("GET/edit-profile", new EditProfileAction());
+        PAGES.put("POST/edit-profile", new EditProfileAction());
     }
 
     public Action getAction(HttpServletRequest request, HttpServletResponse response) {

@@ -8,30 +8,35 @@
 </fmt:bundle>
 
 <%@include file='core/header.jsp' %>
-<div class="container">
-  <div class="row">
-    <div class="col-3">
-      <div class="card">
-        <div class="card-body">
-          <a href="/fs/articles" class="text-decoration-none mb-2">
-            <button type="button" class="btn btn-dark w-100">All</button>
-          </a>
-          <h6>
-            <c:forEach items="${tags}" var="tag">
-              <a href="/fs/articles?tag=${tag.getId()}" class="text-decoration-none">
-                <span class="badge badge-secondary">${tag.getName()}</span>
-              </a>
-            </c:forEach>
-          </h6>
-        </div>
+<div class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>${profile.getFistName()}</h2>
       </div>
-    </div>
-    <div class="col-9 px-0">
-      <div class="text-center">
-        <h2>${title}</h2>
+      <div class="col-12 text-center">
+        <span class="mx-2" style="color: green;">
+          <i class="fas fa-thumbs-up"></i>
+          ${profile.getCountLikes()}
+        </span>
+        <span class="mx-2" style="color: red;">
+          <i class="fas fa-thumbs-down"></i>
+          ${profile.getCountDislikes()}
+        </span>
+        <hr>
+      </div>
+      <div class="col-12">
+        <c:if test="${not empty user && user.getId() == profile.getId()}">
+          <a href="/fs/edit-profile">
+            <button class="btn btn-warning" type="submit">Edit</button>
+          </a>
+        </c:if>
+      </div>
+      <div class="col-12">
+        <h3>${title}</h3>
         <div class="container">
           <div class="row">
-            <c:forEach items="${list}" var="item">
+            <c:forEach items="${profile.getArticles()}" var="item">
               <div class="col-12">
                 <div class="article card">
                   <div class="card-header d-flex" style="justify-content: space-between">

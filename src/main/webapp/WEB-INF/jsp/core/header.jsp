@@ -63,6 +63,11 @@
           </a>
         </c:if>
         <c:if test="${not empty user}">
+          <span class="pr-2 mr-2" style="border-right: 1px solid lightgray">
+            <a href="/fs/user_profile?userId=${user.getId()}">
+                ${user.getFirstName()}
+            </a>
+          </span>
           <a href="/fs/logout">
               ${logout}
           </a>

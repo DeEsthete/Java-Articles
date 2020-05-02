@@ -35,6 +35,7 @@ public class ArticleAction implements Action {
         ArticleViewModel model = new ArticleViewModel();
         model.setId(article.getId());
         model.setUserId(article.getUserId());
+        model.setUserName(userDao.findById(article.getUserId()).getFirstName());
         model.setTitle(article.getTitle());
         model.setBody(article.getBody());
         model.setCommentaryListId(article.getCommentaryListId());

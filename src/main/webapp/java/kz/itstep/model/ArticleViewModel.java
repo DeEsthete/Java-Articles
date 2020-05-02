@@ -7,6 +7,7 @@ import java.util.List;
 public class ArticleViewModel {
     private int id;
     private int userId;
+    private String userName;
     private String title;
     private String body;
     private int commentaryListId;
@@ -35,6 +36,14 @@ public class ArticleViewModel {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getTitle() {
